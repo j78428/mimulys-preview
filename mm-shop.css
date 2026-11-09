@@ -1,5 +1,12 @@
 /* 只給 1shop 用：把商店內容區對齊形象站（欄寬、留白、分類頁頭、商品卡）。 */
 
+/* 1shop 為舊的固定頁首留的上方空白（手機 50px）拿掉 */
+html body{padding-top:0!important;margin-top:0!important}
+
+/* 共用頁首載入前，先用同尺寸的色塊佔位，避免畫面跳動 */
+html body:not(.mm-ready)::before{content:"";display:block;height:106px;background:linear-gradient(var(--night-deep) 0 34px,var(--paper) 34px);border-bottom:1px solid var(--line)}
+@media (max-width:767px){html body:not(.mm-ready)::before{height:98px}}
+
 /* 舊頁首與舊頁尾內容換掉；Powered by 那行保留 */
 .footer .container{display:none!important}
 .footer{background:var(--night-deep)!important;padding:0!important;margin:0!important;border:0!important}

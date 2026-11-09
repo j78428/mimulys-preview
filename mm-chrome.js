@@ -84,6 +84,15 @@
     +'<div><h3>協助</h3><ul><li>'+A('guide','購物說明')+'</li><li>'+A('guide-contact','聯絡我們')+'</li><li><a href="'+s('login')+'">會員登入</a></li></ul></div>'
     +'</div><p class="mm-foot-note">大雷禹有限公司 Tonitrus Illustris Ltd.｜contact@tonitrusillustris.com｜Instagram @jennchiang_<br>世界觀插畫：鄭宜芳。部分商品與情境照片來自 Pexels，正式上線會換成 Mimulys 自己拍攝的影像。</p></div></footer>');
 
+  /* 分頁小圖示與標題：兩站一致 */
+  [].forEach.call(document.querySelectorAll('link[rel~="icon"],link[rel="apple-touch-icon"]'),function(l){l.parentNode.removeChild(l)});
+  [['icon','img/favicon.png'],['apple-touch-icon','img/apple-touch-icon.png']].forEach(function(x){var l=document.createElement('link');l.rel=x[0];l.href=BASE+x[1];document.head.appendChild(l)});
+  if(onShop){
+    var fixTitle=function(){var t=document.title.split(/ - |｜/)[0].trim();var want=(t&&!/^(Mimulys|Joseph選品店)$/.test(t)?t+'｜':'')+'Mimulys';if(document.title!==want)document.title=want};
+    fixTitle();
+    var tt=document.querySelector('title');if(tt)new MutationObserver(fixTitle).observe(tt,{childList:true});
+  }
+
   /* 掛到頁面 */
   var body=document.body;
   body.insertBefore(search,body.firstChild);
