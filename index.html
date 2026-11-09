@@ -290,7 +290,7 @@ p{margin:0}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}.btn:active,.tool:active{transform:none}}
 .card-img{aspect-ratio:1/1}
 </style>
-<link rel="stylesheet" href="mm-chrome.css">
+<link rel="stylesheet" href="mm-chrome.css?v=2">
 </head><body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
@@ -307,7 +307,7 @@ p{margin:0}
   <symbol id="i-minus" viewBox="0 0 24 24"><path d="M6 12h12"/></symbol>
 </defs></svg>
 <div id="app"></div>
-<script src="mm-chrome.js"></script>
+<script src="mm-chrome.js?v=2"></script>
 <script>
 (function(){
 const M=window.MM,SHOPU=M.SHOP,CATU={all:SHOPU+M.CAT.all,crystal:SHOPU+M.CAT.crystal,jewelry:SHOPU+M.CAT.jewelry};
@@ -342,7 +342,7 @@ const POSTS=[
 ];
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const nt=n=>'NT$'+Number(n).toLocaleString('en-US');
+const nt=n=>'NT$ '+Number(n).toLocaleString('en-US');
 const ic=(n,c='')=>`<svg class="icon ${c}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 const card=p=>`<a class="card" href="${SHOPU}products/${encodeURIComponent(p.name)}">
   <span class="card-img"><img src="img/p-${p.id}.jpg" alt="${esc(p.name)}" loading="lazy"></span>
@@ -448,7 +448,7 @@ function render(){
  window.scrollTo(0,0);
  if(/-items$/.test(r)){const t=$('#items');if(t)t.scrollIntoView()}
  if(r==='guide-contact'){const t=$('#contact');if(t)t.scrollIntoView()}
- const names={brands:'品牌',about:'關於',journal:'札記',guide:'購物說明','guide-contact':'聯絡我們'};const br=r.startsWith('brand-')&&BRANDS[r.split('-')[1]];const po=r.startsWith('post-')&&POSTS.find(x=>x.id===r.slice(5));const tt=names[r]||(br&&br.name)||(po&&po.title)||'';document.title=tt?tt+'｜Mimulys':'Mimulys';
+ const names={brands:'品牌',about:'關於',journal:'札記',guide:'購物說明','guide-contact':'聯絡我們'};const br=r.startsWith('brand-')&&BRANDS[r.split('-')[1]];const po=r.startsWith('post-')&&POSTS.find(x=>x.id===r.slice(5));const tt=names[r]||(br&&(br.name==='Mimulys'?'自有系列':br.name))||(po&&po.title)||'';document.title=tt?tt+'｜Mimulys':'Mimulys';
  revealHero();
 }
 let heroPlayed=false;
