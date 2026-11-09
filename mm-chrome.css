@@ -1,0 +1,87 @@
+/* Mimulys 共用頁首頁尾：形象站與 1shop 載入同一份，兩邊才會完全一致。 */
+:root{
+  --night:#15296b;--night-deep:#0f1f55;--mist:#eef0f8;--paper:#fbfbfe;--ink:#1d2350;--ink-soft:#4d5380;
+  --peri:#6470b4;--line:#d3d6e8;--rose:#f6dfe2;--sky:#d7e6f2;--sun-ink:#ad4420;
+  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;--sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --gutter:clamp(16px,4vw,56px);--drawer:cubic-bezier(.32,.72,0,1);
+}
+html{background:var(--mist)}
+.mm-proto,.mm-head,.mm-search,.mm-foot,.mm-drawer,.mm-scrim{font-family:var(--sans);letter-spacing:.01em;box-sizing:border-box}
+.mm-proto *,.mm-head *,.mm-search *,.mm-foot *,.mm-drawer *{box-sizing:border-box}
+.mm-wrap{padding-left:max(var(--gutter),env(safe-area-inset-left,0px));padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
+.mm-inner{max-width:1280px;margin:0 auto}
+.mm-icon{width:22px;height:22px;stroke:currentColor;stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none;display:block}
+
+/* 頂部說明 */
+.mm-proto{background:var(--night-deep);color:#e7eaf8;font-size:13px;line-height:1.5;text-align:center;padding-top:7px;padding-bottom:7px}
+
+/* 頁首 */
+.mm-head{position:sticky;top:0;z-index:1000;background:var(--paper);border-bottom:1px solid var(--line);color:var(--ink);line-height:1.8}
+.mm-head-in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;height:72px}
+.mm-logo{display:flex;align-items:center;gap:10px;text-decoration:none;justify-self:start}
+.mm-logo img{display:block;height:auto;max-width:none}
+.mm-logo img:first-child{width:40px}.mm-logo img:last-child{width:112px}
+.mm-nav{display:flex;gap:28px;align-items:center}
+.mm-head a{color:var(--ink);text-decoration:none}
+.mm-navlink{font-size:15px;white-space:nowrap;text-underline-offset:.25em;text-decoration-thickness:1px}
+.mm-head a.mm-navlink[aria-current=page]{text-decoration:underline}
+.mm-dd{position:relative;display:flex;align-items:center;gap:2px}
+.mm-dd .mm-icon{width:15px;height:15px}
+.mm-dd-menu{position:absolute;top:100%;left:-16px;min-width:168px;padding-top:24px;opacity:0;visibility:hidden;transition:opacity 140ms ease,visibility 0s linear 140ms}
+.mm-dd-menu>div{display:grid;gap:8px;background:var(--paper);border:1px solid var(--line);padding:14px 16px;font-size:14.5px}
+.mm-dd:hover .mm-dd-menu,.mm-dd:focus-within .mm-dd-menu{opacity:1;visibility:visible;transition-delay:0s}
+.mm-tools{display:flex;align-items:center;gap:16px;justify-self:end}
+.mm-tool{position:relative;display:grid;place-items:center;width:40px;height:40px;padding:0;background:none;border:0;color:var(--ink);cursor:pointer;transition:background-color 160ms ease,transform 140ms ease}
+.mm-tool:active{transform:scale(.95)}
+.mm-count{position:absolute;top:2px;right:0;min-width:18px;height:18px;padding:0 5px;background:var(--sun-ink);color:#fff;font-size:11px;line-height:18px;text-align:center}
+.mm-count[hidden]{display:none}
+.mm-menu-btn{display:none}
+@media (hover:hover) and (pointer:fine){.mm-tool:hover{background:var(--mist)}.mm-navlink:hover,.mm-dd-menu a:hover{text-decoration:underline}}
+@media (max-width:767px){
+  .mm-nav,.mm-tool-member{display:none}
+  .mm-menu-btn{display:grid;justify-self:start;margin-left:-8px}
+  .mm-head-in{gap:0;height:64px}
+  .mm-logo{justify-self:center}
+  .mm-logo img:first-child{display:none}
+  .mm-logo img:last-child{width:104px}
+  .mm-tools{gap:0;margin-right:-8px}
+}
+
+/* 搜尋列 */
+.mm-search{background:var(--paper);border-bottom:1px solid var(--line);padding-top:14px;padding-bottom:14px;position:sticky;top:72px;z-index:999}
+.mm-search[hidden]{display:none}
+.mm-search form{display:flex;gap:10px;max-width:560px;margin:0 auto}
+.mm-search input{flex:1;min-width:0;min-height:44px;background:#fff;border:1px solid #b5b9d4;padding:8px 14px;font:inherit;font-size:16px;color:var(--ink);border-radius:0}
+.mm-search input:focus{outline:none;border-color:var(--night);box-shadow:0 0 0 1px var(--night)}
+.mm-search button{min-height:44px;padding:8px 22px;background:var(--night);border:1px solid var(--night);color:#fff;font:inherit;font-weight:500;letter-spacing:.06em;cursor:pointer}
+@media (max-width:767px){.mm-search{top:64px}}
+
+/* 手機選單 */
+.mm-scrim{position:fixed;inset:0;z-index:1040;background:rgba(15,31,85,.42);opacity:0;pointer-events:none;transition:opacity 220ms ease}
+.mm-scrim.on{opacity:1;pointer-events:auto;transition-duration:320ms}
+.mm-drawer{position:fixed;top:0;bottom:0;left:0;z-index:1041;width:min(300px,86vw);overflow:auto;background:var(--paper);color:var(--ink);border-right:1px solid var(--line);transform:translateX(-100%);visibility:hidden;transition:transform 240ms var(--drawer),visibility 0s linear 240ms}
+.mm-drawer.on{transform:none;visibility:visible;transition:transform 340ms var(--drawer),visibility 0s}
+.mm-drawer-close{position:absolute;top:12px;right:12px}
+.mm-mobile-nav{display:grid;padding:60px 24px 32px;gap:2px;font-size:16px;line-height:1.8}
+.mm-drawer a{color:var(--ink);text-decoration:none}
+.mm-mobile-nav>a{padding:9px 0}
+.mm-drawer a[aria-current=page]{text-decoration:underline;text-underline-offset:.4em}
+.mm-mobile-nav .mm-sub{display:grid;padding-left:16px;font-size:15px}
+.mm-drawer .mm-sub a{padding:6px 0;color:var(--ink-soft)}
+.mm-nav-contact{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-soft)}
+
+/* 頁尾 */
+.mm-foot{background:var(--night-deep);color:#e7eaf8;padding-top:64px;padding-bottom:36px;line-height:1.8;font-size:16px}
+.mm-foot-grid{display:grid;grid-template-columns:minmax(0,4fr) repeat(3,minmax(0,2fr));gap:32px}
+.mm-foot h3{font:500 15px/1.6 var(--sans);margin:0 0 10px;letter-spacing:.04em;color:#e7eaf8}
+.mm-foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:14px}
+.mm-foot a{color:#e7eaf8;text-decoration:none}
+.mm-foot a:hover{color:#e7eaf8;text-decoration:underline}
+.mm-foot p{margin:0;color:#e7eaf8}
+.mm-foot-mark{display:block;width:56px;height:auto;margin-bottom:12px;filter:brightness(0) invert(1)}
+.mm-foot-line{font-size:14px;max-width:22em}
+.mm-foot .mm-foot-note{margin-top:44px;padding-top:20px;border-top:1px solid rgba(255,255,255,.2);font-size:12.5px;line-height:1.8;color:#c9cfed}
+@media (max-width:767px){.mm-foot-grid{grid-template-columns:1fr;gap:28px;justify-items:center;text-align:center}.mm-foot-mark{margin-inline:auto}.mm-foot .mm-foot-note{text-align:center}}
+
+/* 兩邊共用的商品卡文字與分類頁頭 */
+.mm-card-brand{display:block;font-size:13px;color:var(--ink-soft);line-height:1.5}

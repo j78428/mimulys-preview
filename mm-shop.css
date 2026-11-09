@@ -1,0 +1,43 @@
+/* 只給 1shop 用：把商店內容區對齊形象站（欄寬、留白、分類頁頭、商品卡）。 */
+
+/* 舊頁首與舊頁尾內容換掉；Powered by 那行保留 */
+.footer .container{display:none!important}
+.footer{background:var(--night-deep)!important;padding:0!important;margin:0!important;border:0!important}
+.footer .copyright{margin:0!important;padding:0 0 18px!important;border:0!important;background:transparent!important;text-align:center}
+.footer .copyright,.footer .copyright a{font-size:12px!important;color:#9aa2cf!important}
+
+/* 右下角浮動結帳鈕：頁首已有購物車，形象站也沒有這顆 */
+.chat .nextStep .btn-cart{display:none!important}
+
+/* 內容欄寬對齊頁首 */
+@media (min-width:768px){
+  .page-archive>.container,.page-single>.container,body>.container{max-width:1280px!important;width:auto!important;padding-left:var(--gutter)!important;padding-right:var(--gutter)!important}
+}
+
+/* 分類頁頭：與形象站相同 */
+.page-archive .breadcrumb-holder{display:none!important}
+.mm-shop-head{width:100%}
+.mm-page-head{display:grid;gap:10px;justify-items:center;text-align:center;padding-block:clamp(36px,5vw,64px) clamp(20px,3vw,32px)}
+.mm-page-head h1{font-family:var(--serif)!important;font-weight:500!important;font-size:clamp(28px,3.4vw,42px)!important;line-height:1.45;margin:0!important;letter-spacing:.02em;color:var(--ink)}
+.mm-crumb{font-size:13.5px;color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:6px;line-height:1.6}
+.mm-crumb a{color:var(--ink-soft);text-decoration:none}
+.mm-crumb a:hover{text-decoration:underline}
+.mm-shopbar{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:28px;padding-block:14px;margin-bottom:28px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mm-pill{display:inline-flex;align-items:center;min-height:38px;font-size:15px;color:var(--ink)!important;text-decoration:none!important;border-bottom:2px solid transparent;transition:border-color 160ms ease}
+.mm-pill[aria-current=page]{border-bottom-color:var(--night);font-weight:500}
+.page-archive{padding-bottom:clamp(56px,8vw,112px)}
+
+/* 商品格線：間距與形象站相同 */
+.archive-products{gap:clamp(32px,3.4vw,48px) clamp(14px,2vw,28px)!important;margin:0!important}
+.single-product-text{padding:12px 0 0!important;gap:3px}
+.single-product-text .title{font-family:var(--serif)!important;font-size:16px!important}
+.single-product .price .currency{font-size:15px!important;margin:0!important}
+
+/* 商品頁：品牌連結 */
+.mm-buy-brand{justify-self:start;font-size:14.5px;color:var(--ink-soft)!important;text-decoration:underline!important;text-underline-offset:.25em}
+.product-data .price .currency{font-size:23px!important;margin:0!important}
+
+/* 手機 */
+@media (max-width:767px){
+  .page-archive>.container{padding-left:16px!important;padding-right:16px!important}
+}
