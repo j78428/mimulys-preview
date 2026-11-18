@@ -344,10 +344,10 @@ const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelect
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const nt=n=>'NT$ '+Number(n).toLocaleString('en-US');
 const ic=(n,c='')=>`<svg class="icon ${c}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
-const card=(p,o)=>`<a class="card" href="${SHOPU}products/${encodeURIComponent(p.name)}">
+const card=p=>`<a class="card" href="${SHOPU}products/${encodeURIComponent(p.name)}">
   <span class="card-img"><img src="img/p-${p.id}.jpg" alt="${esc(p.name)}" loading="lazy"></span>
   <span class="card-text"><span class="card-brand">${esc(BRANDS[p.brand].name)}</span><span class="card-name">${esc(p.name)}</span>
-  ${o&&o.price===false?'':`<span class="card-meta"><span>${nt(p.price)}</span></span>`}</span></a>`;
+  </span></a>`;
 const V={};
 V.home=()=>`
 <section class="hero"><div class="hero-in">
@@ -393,7 +393,7 @@ function brandPage(k){const b=BRANDS[k];const ps=P.filter(p=>p.brand===k);return
  <div class="split-text"><div class="frame" style="aspect-ratio:3/2"><img src="${b.craftImg}" alt="" loading="lazy"></div><h3>材質與工藝</h3><p class="measure soft">${esc(b.craft)}</p></div></div></section>
 <section class="wrap" id="items" style="padding-bottom:var(--band);scroll-margin-top:96px"><div class="inner">
  <div class="sec-head"><h2>${esc(b.name)} 的商品</h2><a class="link small" href="${CATU.all}">看全部選物</a></div>
- <div class="grid">${ps.map(p=>card(p,{price:false})).join('')}</div>
+ <div class="grid">${ps.map(card).join('')}</div>
  <p class="small" style="margin-top:44px"><a class="link" href="#brands">看其他品牌</a></p>
 </div></section>`}
 V.about=()=>`
