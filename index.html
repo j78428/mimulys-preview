@@ -133,7 +133,10 @@ p{margin:0}
 @media (max-width:640px){.brandrow{grid-template-columns:minmax(0,1fr) 72px;gap:6px 14px}.brandrow img{width:72px;height:72px;grid-row:1/3;grid-column:2}}
 /* Article list */
 .posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
-.post{text-decoration:none;display:grid;gap:10px;align-content:start;padding-top:18px;border-top:1px solid currentColor}
+.post{text-decoration:none;display:grid;gap:10px;align-content:start}
+.post .frame{aspect-ratio:4/3;display:block;margin-bottom:6px}
+/* 頂端「提案原型」提示條不顯示（2026-11-19 Joseph 要求） */
+.mm-proto,.proto{display:none!important}
 .post h3{font-size:20px}
 @media (max-width:760px){.posts{grid-template-columns:1fr}}
 /* Footer */
@@ -380,7 +383,7 @@ V.home=()=>`
  <div class="posts">${POSTS.map(postCard).join('')}</div>
 </div></section>`;
 function brandRows(){return Object.entries(BRANDS).map(([k,b])=>`<a class="brandrow" href="#brand-${k}"><span class="brandrow-name">${esc(b.name)}${b.sample?' <span class="sample" style="vertical-align:middle">示意品牌</span>':''}</span><span class="soft">${esc(b.line)}</span><img src="${b.img}" alt="" loading="lazy"></a>`).join('')}
-function postCard(p){return `<a class="post" href="#post-${p.id}"><h3>${esc(p.title)}</h3><p class="small soft">${esc(p.sum)}</p></a>`}
+function postCard(p){return `<a class="post" href="#post-${p.id}"><span class="frame"><img src="${p.img}" alt="" loading="lazy"></span><h3>${esc(p.title)}</h3><p class="small soft">${esc(p.sum)}</p></a>`}
 function acc(t,b,open){return `<div class="acc" data-open="${!!open}"><button data-acc aria-expanded="${!!open}"><span>${t}</span>${ic('chev','chev')}</button><div class="acc-b"><div><div>${b}</div></div></div></div>`}
 V.brands=()=>`<div class="wrap"><div class="inner"><div class="page-head"><h1>品牌</h1><p class="measure soft">Mimulys 自有系列，以及與品牌美感呼應、在台灣介紹與販售的作品。</p></div><div style="padding-bottom:var(--band)">${brandRows()}</div></div></div>`;
 function brandPage(k){const b=BRANDS[k];const ps=P.filter(p=>p.brand===k);return `
@@ -414,7 +417,7 @@ V.about=()=>`
  <div class="split-text"><h2>接下來的展開</h2><p class="measure">從水晶與飾品出發，逐步擴展至陶藝、器物與香氛，將美帶入身上佩戴的飾品、手中觸碰的器物，以及空間裡流動的香氣。</p></div>
  <div class="hero-cta" style="justify-content:flex-start;align-self:center"><a class="btn on-night" href="${CATU.all}">逛選物</a><a class="btn ghost-night" href="#brands">認識品牌</a></div>
 </div></section>`;
-V.journal=()=>`<div class="wrap"><div class="inner"><div class="page-head"><h1>札記</h1></div><div class="posts" style="padding-bottom:var(--band)">${POSTS.map(p=>`<a class="post" style="border:0;padding:0" href="#post-${p.id}"><span class="frame" style="aspect-ratio:4/3;display:block"><img src="${p.img}" alt="" loading="lazy"></span><h3>${esc(p.title)}</h3><p class="small soft">${esc(p.sum)}</p></a>`).join('')}</div></div></div>`;
+V.journal=()=>`<div class="wrap"><div class="inner"><div class="page-head"><h1>札記</h1></div><div class="posts" style="padding-bottom:var(--band)">${POSTS.map(postCard).join('')}</div></div></div>`;
 function postPage(p){return `<article class="wrap band"><div class="inner" style="display:grid;gap:28px;justify-items:center"><div class="prose" style="width:100%"><nav class="crumb"><a href="#journal">札記</a></nav><h1>${esc(p.title)}</h1></div>
  <div class="frame" style="width:100%;max-width:900px;aspect-ratio:16/9"><img src="${p.img}" alt=""></div>
  <div class="prose" style="width:100%">${p.body.map(s=>`<p>${esc(s)}</p>`).join('')}<a class="btn ghost" style="justify-self:start" href="${p.to[0]==='shop'?CATU.all:'#'+p.to[0]}">${p.to[1]}</a></div></div></article>`}
